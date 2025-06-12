@@ -73,7 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
+  m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,6 +97,7 @@ GameObject:
   - component: {fileID: 109206247921002352}
   - component: {fileID: 3584153034589278328}
   - component: {fileID: 5199209547340129842}
+  - component: {fileID: -7936894159919913300}
   m_Layer: 0
   m_Name: ItemPickups
   m_TagString: Untagged
@@ -198,3 +200,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &-7936894159919913300
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8129024274285331684}
+  m_Enabled: 1
+  m_SortingLayerID: -44025399
+  m_SortingLayer: 1
+  m_SortingOrder: 0
+  m_SortAtRoot: 0

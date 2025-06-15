@@ -11,13 +11,11 @@ public class HealManager : MonoBehaviour
 
     private PlayerController playerController;
     private GameManager gameManager;
-    private int arenaLarge;
 
     private void Start()
     {
         playerController = FindAnyObjectByType<PlayerController>();
         gameManager = FindAnyObjectByType<GameManager>();
-        arenaLarge = gameManager.ArenaLarge;
         StartCoroutine(SpawnHealsUp());
     }
 

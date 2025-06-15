@@ -5,9 +5,10 @@ using UnityEngine;
 public class GunAnimation : MonoBehaviour
 {
     public float GunFireRate;
+
     private Animator animator;
-    
     private bool isGunShoot;
+
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();

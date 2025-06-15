@@ -24,7 +24,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnPointsEnemy()
     {
-
         upR.position = new Vector3(arenaLarge, arenaLarge, 0);
         upL.position = new Vector3(-arenaLarge, arenaLarge, 0);
         downR.position = new Vector3(arenaLarge, -arenaLarge, 0);

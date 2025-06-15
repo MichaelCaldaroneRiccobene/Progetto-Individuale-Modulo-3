@@ -6,7 +6,6 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] int damage = 5;
-    [SerializeField] GameObject sfxEnemyDead;
 
     private Move2D move2D;
     private LifeController lifeController;
@@ -41,7 +40,6 @@ public class EnemyController : MonoBehaviour
         {
             gameManager.AddEnemyDie();
 
-            if(sfxEnemyDead != null) Instantiate(sfxEnemyDead,transform.position,Quaternion.identity);
             Destroy(gameObject);
         }
     }
@@ -54,7 +52,7 @@ public class EnemyController : MonoBehaviour
             LifeController life = controller.GetComponent<LifeController>();
             if (life != null) life.AddHp(-damage);
 
-            lifeController.AddHp(-9000);
+            lifeController.AddHp(-life.Hp);
         }
     }
 }

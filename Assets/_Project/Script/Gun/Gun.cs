@@ -20,12 +20,13 @@ public class Gun : MonoBehaviour
     {
         enemySpawner = FindAnyObjectByType<EnemySpawner>();
         gunAnimation = GetComponent<GunAnimation>();
+        gunAnimation.GunFireRate = fireRate;
 
-        if(enemySpawner != null) StartCoroutine(FindEnemy());
+        if (enemySpawner != null) StartCoroutine(FindEnemy());
     }
     public virtual void Update()
     {
-        ShootEnemy();
+        TryShootEnemy();
     }
     public virtual void Shoot(Vector2 dir)
     {
@@ -33,30 +34,24 @@ public class Gun : MonoBehaviour
         Vector2 spawnBullet = transform.position;
 
         gunAnimation.AnimationGunShoot();
-        gunAnimation.GunFireRate = fireRate;
 
         Bullet bullet = Instantiate(bulletPreFab, spawnBullet, Quaternion.identity);
         bullet.BulletPositionDirection(dir);
         bullet.Damage = damage;
     }
 
-    public virtual void TryToShoot(Vector2 dir)
-    {
-        bool canShoot = Time.time - lastShootTimer >= fireRate;
-        if(!canShoot) return;
-
-        Shoot(dir);
-    }
-
-    public virtual void ShootEnemy()
+    public virtual void TryShootEnemy()
     {
         if (enemyController != null)
         {
+            bool canShoot = Time.time - lastShootTimer >= fireRate;
+            if(!canShoot) return;
+
             Vector2 direction = enemyController.transform.position - transform.position;
             Vector2 distance = direction;
 
             if (direction.sqrMagnitude > 1) direction /= Mathf.Sqrt(direction.sqrMagnitude);
-            if (distance.magnitude < gunRange) TryToShoot(direction);
+            if (distance.magnitude < gunRange) Shoot(direction);
         }
     }
 
@@ -67,8 +62,8 @@ public class Gun : MonoBehaviour
         for (int i = 0; i < enemySpawner.transform.childCount; i++)
         {
             Transform enemyTransform = enemySpawner.transform.GetChild(i);
-
             EnemyController enemy = enemyTransform.GetComponent<EnemyController>();
+
             if (enemy == null) continue;
 
             float distance = Vector2.Distance(transform.position, enemyTransform.transform.position);

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public int ArenaLarge = 18;
+
     private int enemyDie;
     private int level;
 
@@ -22,7 +24,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("//// New Level World " + level + " ////");
     }
 
-    public void SpawnObjectClosePlayer(PlayerController pc,float rangeA,float rangeB,float arenaLarge,GameObject spawnPrefab,Transform transform)
+    public void SpawnObjectClosePlayer(PlayerController pc,float rangeA,float rangeB,GameObject spawnPrefab,Transform transform)
     {
         float spawnX;
         float spawnY;
@@ -35,8 +37,8 @@ public class GameManager : MonoBehaviour
         spawnX = pc.transform.position.x + Random.Range(rangeA, rangeB);
         spawnY = pc.transform.position.y + Random.Range(rangeA, rangeB);
 
-        spawnX = Mathf.Clamp(spawnX, -arenaLarge, arenaLarge);
-        spawnY = Mathf.Clamp(spawnY, -arenaLarge, arenaLarge);
+        spawnX = Mathf.Clamp(spawnX, -ArenaLarge, ArenaLarge);
+        spawnY = Mathf.Clamp(spawnY, -ArenaLarge, ArenaLarge);
 
         Vector2 spawnPoint = new Vector2(spawnX, spawnY);
         Instantiate(spawnPrefab, spawnPoint, Quaternion.identity, transform);

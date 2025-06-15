@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3614549849201345603}
-  - component: {fileID: 545711390567183627}
+  - component: {fileID: 6403513358584149116}
   - component: {fileID: 4597095319261428425}
   - component: {fileID: -2619978753829746088}
   m_Layer: 0
@@ -141,7 +141,7 @@ Transform:
   - {fileID: 7222709544122668529}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &545711390567183627
+--- !u!114 &6403513358584149116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,13 +150,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5329117340641138018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc52275fbe09d304d9d207189f1af36d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4379f1dc4b5f8c143b5fee0020afe270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPreFab: {fileID: 1998569755850049747, guid: 8f2b0e918c650ec4f85bf4f70abad4b2,
     type: 3}
   fireRate: 0.5
-  gunRange: 7
+  gunRange: 10
+  damage: 4
 --- !u!114 &4597095319261428425
 MonoBehaviour:
   m_ObjectHideFlags: 0

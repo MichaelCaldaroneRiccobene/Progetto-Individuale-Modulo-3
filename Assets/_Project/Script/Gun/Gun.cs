@@ -6,27 +6,28 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private Bullet bulletPreFab;
-    [SerializeField] float fireRate = 0.5f;
-    [SerializeField] int gunRange = 10;
+    [SerializeField] protected Bullet bulletPreFab;
+    [SerializeField] protected float fireRate = 0.5f;
+    [SerializeField] protected int gunRange = 10;
+    [SerializeField] protected int damage = 4;
 
-    private float lastShootTimer = 0f;
-    private EnemyController enemyController;
-    private EnemySpawner enemySpawner;
-    private GunAnimation gunAnimation;
+    protected float lastShootTimer = 0f;
+    protected EnemyController enemyController;
+    protected EnemySpawner enemySpawner;
+    protected GunAnimation gunAnimation;
 
-    private void Start()
+    public virtual void Start()
     {
         enemySpawner = FindAnyObjectByType<EnemySpawner>();
         gunAnimation = GetComponent<GunAnimation>();
 
         if(enemySpawner != null) StartCoroutine(FindEnemy());
     }
-    private void Update()
+    public virtual void Update()
     {
         ShootEnemy();
     }
-    public void Shoot(Vector2 dir)
+    public virtual void Shoot(Vector2 dir)
     {
         lastShootTimer  = Time.time;
         Vector2 spawnBullet = transform.position;
@@ -36,9 +37,10 @@ public class Gun : MonoBehaviour
 
         Bullet bullet = Instantiate(bulletPreFab, spawnBullet, Quaternion.identity);
         bullet.BulletPositionDirection(dir);
+        bullet.Damage = damage;
     }
 
-    public void TryToShoot(Vector2 dir)
+    public virtual void TryToShoot(Vector2 dir)
     {
         bool canShoot = Time.time - lastShootTimer >= fireRate;
         if(!canShoot) return;
@@ -46,18 +48,19 @@ public class Gun : MonoBehaviour
         Shoot(dir);
     }
 
-    private void ShootEnemy()
+    public virtual void ShootEnemy()
     {
         if (enemyController != null)
         {
             Vector2 direction = enemyController.transform.position - transform.position;
-            if (direction.sqrMagnitude > 1) direction /= Mathf.Sqrt(direction.sqrMagnitude);
+            Vector2 distance = direction;
 
-            if (direction.magnitude < gunRange) TryToShoot(direction);
+            if (direction.sqrMagnitude > 1) direction /= Mathf.Sqrt(direction.sqrMagnitude);
+            if (distance.magnitude < gunRange) TryToShoot(direction);
         }
     }
 
-    private IEnumerator FindEnemy()
+    public virtual IEnumerator FindEnemy()
     {
         float minDist = float.PositiveInfinity;
 

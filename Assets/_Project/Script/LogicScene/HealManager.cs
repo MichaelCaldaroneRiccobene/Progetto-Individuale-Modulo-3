@@ -8,22 +8,22 @@ public class HealManager : MonoBehaviour
     [SerializeField] int timeToSpawn = 15;
     [SerializeField] int rangeA = 15;
     [SerializeField] int rangeB = 30;
-    [SerializeField] int arenaLarge = 49;
 
     private PlayerController playerController;
     private GameManager gameManager;
+    private int arenaLarge;
 
     private void Start()
     {
         playerController = FindAnyObjectByType<PlayerController>();
         gameManager = FindAnyObjectByType<GameManager>();
-
+        arenaLarge = gameManager.ArenaLarge;
         StartCoroutine(SpawnHealsUp());
     }
 
     IEnumerator SpawnHealsUp()
     {
-        gameManager.SpawnObjectClosePlayer(playerController, rangeA, rangeB, arenaLarge, healPrefab,transform);
+        gameManager.SpawnObjectClosePlayer(playerController, rangeA, rangeB, healPrefab,transform);
 
         timeToSpawn++;
 

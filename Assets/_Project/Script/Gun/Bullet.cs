@@ -7,6 +7,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float lifeSpan = 5f;
     [SerializeField] private float speed = 5f;
     [SerializeField] private int damage = 3;
+    public int Damage
+    {
+        get => damage;
+        set => damage = Mathf.Max(0,value);
+    }
 
     private Rigidbody2D rb;
     private void Awake()

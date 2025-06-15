@@ -7,26 +7,38 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] int timeToSpawn = 10;
     [SerializeField] int enemyToSpawn = 2;
-    [SerializeField] int rangeA = 15;
-    [SerializeField] int rangeB = 30;
-    [SerializeField] int arenaLarge = 49;
+    [SerializeField] Transform upR, upL, downR, downL;
 
-    private PlayerController playerController;
     private GameManager gameManager;
+    private int arenaLarge;
+    private Vector3[] spawnPoints;
 
     private void Start()
     {
-        playerController = FindAnyObjectByType<PlayerController>();
         gameManager = FindAnyObjectByType<GameManager>();
+        arenaLarge = gameManager.ArenaLarge;
 
+        SpawnPointsEnemy();
         StartCoroutine(SpawnEnemys());
+    }
+
+    private void SpawnPointsEnemy()
+    {
+
+        upR.position = new Vector3(arenaLarge, arenaLarge, 0);
+        upL.position = new Vector3(-arenaLarge, arenaLarge, 0);
+        downR.position = new Vector3(arenaLarge, -arenaLarge, 0);
+        downL.position = new Vector3(-arenaLarge, -arenaLarge, 0);
+
+        spawnPoints = new[] { upR.transform.position, upL.transform.position, downR.transform.position, downL.transform.position };
     }
 
     IEnumerator SpawnEnemys()
     {
         for (int i = 0; i < enemyToSpawn; i++)
         {
-            gameManager.SpawnObjectClosePlayer(playerController,rangeA,rangeB,arenaLarge,enemyPrefab,transform);
+            int n = Random.Range(0,spawnPoints.Length);
+            Instantiate(enemyPrefab, spawnPoints[n], Quaternion.identity, transform);
         }
 
         gameManager.LevelWordl();
